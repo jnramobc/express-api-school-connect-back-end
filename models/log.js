@@ -7,12 +7,11 @@ const logSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    
-    // studentId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'StudentProfile',
-    //     required: true
-    // }, this will be for our stretch
+    studentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'StudentProfile',
+        required: true
+    },
     purpose: {
         type: String,
         enum: ['Conduct Referral', 'MTSS Referral', 'Journal'],
