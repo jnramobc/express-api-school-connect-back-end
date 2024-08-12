@@ -1,23 +1,26 @@
 const mongoose = require('mongoose');
 
-
-
-
-
-
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    hashedPassword: {
+    password: {
         type: String,
         required: true
     },
-    comments: [logSchema],
-    logs: [logSchema],
-
+    logId: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Log'
+    }],
+    commentId: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
+    }]
 });
+
+
 
 userSchema.set('toJSON', {
     transform: (document, returnedObject) => {

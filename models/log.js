@@ -1,11 +1,18 @@
 const mongoose = require('mongoose')
+const Comment = require('./comment')
 
 const logSchema = new mongoose.Schema({
-    studentId: {
-        type: String,
-        enum: [], //.map of the array of student profiles???
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
+    
+    // studentId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'StudentProfile',
+    //     required: true
+    // }, this will be for our stretch
     purpose: {
         type: String,
         enum: ['Conduct Referral', 'MTSS Referral', 'Journal'],
@@ -16,12 +23,20 @@ const logSchema = new mongoose.Schema({
     },
     notes: {
         type: String,
-        required: true
+        required: true,
     },
+    
     actionCompleted: Boolean,
-    // how to do createdAt?
-    // how to do updatedAt?
-    comments: [commentSchema], // not sure if this is right
+    createdAt: { 
+        type: Date, 
+        default: Date.now
+    },
+    updatedAt: {
+        type:Date,
+        default: Date.now
+    },
+    
+    comments: [Comment],
 });
 
 module.exports = mongoose.model('Log', logSchema);
