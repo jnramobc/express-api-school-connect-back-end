@@ -23,4 +23,21 @@ router.post('/', async (req, res) => {
     }
   });
 
+
+
+router.get('/', async (req, res) => {
+    try {
+      const logs = await Log.find({})
+        .populate('userId', 'username') // Populate user details
+        .populate('studentId', 'firstName lastName') // Populate student details
+        .sort({ createdAt: 'desc' }); // Sort by most recent logs
+  
+      res.status(200).json(logs); // Send logs as JSON
+    } catch (error) {
+      res.status(500).json({ error: error.message }); // Send error if any
+    }
+  });
+  
+
+
 module.exports = router;
