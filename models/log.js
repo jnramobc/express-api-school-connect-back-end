@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const CommentSchema = require('./comment'); 
+const { commentSchema } = require('./comment'); 
 
 const logSchema = new mongoose.Schema({
     userId: {
@@ -39,11 +39,6 @@ const logSchema = new mongoose.Schema({
     comments: [CommentSchema],
 });
 
-<<<<<<< HEAD
-module.exports = logSchema;
-const Log = mongoose.model('Log', logSchema);
-=======
-const Log = mongoose.model('Log', logSchema);
 
->>>>>>> 1200bd6a924219e4bb30014070aab51c5eb04df7
+const Log = mongoose.model('Log', logSchema);
 module.exports = Log;
