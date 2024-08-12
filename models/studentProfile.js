@@ -18,7 +18,7 @@ const studentProfileSchema = new mongoose.Schema({
     plan504: Boolean,
     eld: {
         type: String,
-        enum: ['1', '2', '3', '4', '5', 'FLEP']
+        enum: ['1', '2', '3', '4', '5', 'FLEP', 'N/A']
     },
     logId: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -27,3 +27,4 @@ const studentProfileSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('StudentProfile', studentProfileSchema);
+module.exports = StudentProfile;
