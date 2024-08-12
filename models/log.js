@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { commentSchema } = require('./comment'); 
+const CommentSchema = require('./comment');
 
 const logSchema = new mongoose.Schema({
     userId: {
