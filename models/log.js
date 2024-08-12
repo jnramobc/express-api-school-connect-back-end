@@ -9,7 +9,7 @@ const logSchema = new mongoose.Schema({
     },
     studentId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'StudentProfile',
+        ref: 'Student',
         required: true
     },
     purpose: {
