@@ -1,9 +1,15 @@
 const mongoose = require('mongoose')
+const CommentSchema = require('./comment');
 
 const logSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     studentId: {
-        type: String,
-        enum: [], //.map of the array of student profiles???
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Student',
         required: true
     },
     purpose: {
@@ -16,12 +22,22 @@ const logSchema = new mongoose.Schema({
     },
     notes: {
         type: String,
-        required: true
+        required: true,
     },
+    
     actionCompleted: Boolean,
-    // how to do createdAt?
-    // how to do updatedAt?
-    comments: [commentSchema], // not sure if this is right
+    createdAt: { 
+        type: Date, 
+        default: Date.now
+    },
+    updatedAt: {
+        type:Date,
+        default: Date.now
+    },
+    
+    comments: [CommentSchema],
 });
 
-module.exports = mongoose.model('Log', logSchema);
+
+const Log = mongoose.model('Log', logSchema);
+module.exports = Log;
