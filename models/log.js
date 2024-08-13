@@ -34,10 +34,9 @@ const logSchema = new mongoose.Schema({
         type:Date,
         default: Date.now
     },
-    
     comments: [commentSchema],
 });
 
 
 const Log = mongoose.model('Log', logSchema);
-module.exports = Log;
+module.exports = { logSchema, Log };
