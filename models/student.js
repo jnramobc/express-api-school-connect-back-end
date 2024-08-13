@@ -20,10 +20,12 @@ const studentSchema = new mongoose.Schema({
         type: String,
         enum: ['1', '2', '3', '4', '5', 'FLEP', 'N/A']
     },
-    logId: [{
+    logs: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Log'
     }],
 });
 
-module.exports = mongoose.model('Student', studentSchema);
+const Student = mongoose.model('Student', studentSchema);
+
+module.exports = Student;
