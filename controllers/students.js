@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middleware/verify-token.js');
 const Student = require('../models/student.js');
-const Log = require('../models/log.js')
+const {Log} = require('../models/log.js')
 
 router.use(verifyToken);
 
@@ -70,21 +70,14 @@ router.delete('/:studentId', async (req, res) => {
 
 router.post('/:studentId/logs', async (req, res) => { // create log
     try {
-      req.body.userId = req.user._id;  // Ensure the logged-in user is marked as the author
-      const log = await Log.create(req.body);
-      log.studentId = req.params.studentId // Ensure the studentId is passed into the log
-      log._doc.userId = req.user;  // Attach the full user object for the client
-      console.log(log.studentId)
-      res.status(201).json(log);
-
-      // pass in userId
-      // pass in studentId
-      // createdAt
-      // actionCompleted
+        req.body.userId = req.user._id;  // Ensure the logged-in user is marked as the author
+        req.body.studentId = req.params.studentId;
+        const log = await Log.create(req.body);
+        res.status(201).json(log);
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: error.message });
-    }
+        console.log(error);
+        res.status(500).json({ error: error.message });
+    };
 });
 
 router.get('/:studentId/logs', async (req, res) => { // index logs
