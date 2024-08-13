@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Log = require('./log'); 
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -10,7 +11,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    logId: [{
+    logs: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Log'
     }],

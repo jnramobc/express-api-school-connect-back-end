@@ -21,7 +21,7 @@ app.use(express.json());
 app.use('/users', usersRouter);
 app.use('/staff', staffRouter);
 app.use('/logs', logsRouter);
-app.use('/students', studentRouter)
+app.use('/students', studentRouter) //localhost:3000/students
 
 
 app.listen(3000, () => {
