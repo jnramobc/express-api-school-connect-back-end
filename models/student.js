@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { logSchema } = require('./log');  // Destructure to get logSchema
 
 const studentSchema = new mongoose.Schema({
 
@@ -13,17 +14,14 @@ const studentSchema = new mongoose.Schema({
     grade: {
         type: String,
         required: true
-   },
+    },
     iep: Boolean,
     plan504: Boolean,
     eld: {
         type: String,
         enum: ['1', '2', '3', '4', '5', 'FLEP', 'N/A']
     },
-    logs: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Log'
-    }],
+    logs: [logSchema],
 });
 
 const Student = mongoose.model('Student', studentSchema);

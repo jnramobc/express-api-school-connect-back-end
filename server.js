@@ -6,7 +6,6 @@ const app = express();
 const mongoose = require('mongoose');
 const usersRouter = require('./controllers/users');
 const staffRouter = require('./controllers/staff.js');
-const logsRouter = require('./controllers/logs.js');
 const studentRouter = require('./controllers/students.js')
 
 mongoose.connect(process.env.MONGODB_URI);

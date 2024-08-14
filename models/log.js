@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const CommentSchema = require('./comment');
+const commentSchema = require('./comment');
 
 const logSchema = new mongoose.Schema({
     userId: {
@@ -12,7 +12,7 @@ const logSchema = new mongoose.Schema({
         ref: 'Student',
         required: true
     },
-    purpose: {
+    purpose: { // for the form
         type: String,
         enum: ['Conduct Referral', 'MTSS Referral', 'Journal'],
         required: true
@@ -20,7 +20,7 @@ const logSchema = new mongoose.Schema({
         // the alert of an action required should be automated to 
         // if this property !Journal
     },
-    notes: {
+    notes: { // for the form
         type: String,
         required: true,
     },
@@ -34,10 +34,9 @@ const logSchema = new mongoose.Schema({
         type:Date,
         default: Date.now
     },
-    
-    comments: [CommentSchema],
+    comments: [commentSchema],
 });
 
 
 const Log = mongoose.model('Log', logSchema);
-module.exports = Log;
+module.exports = { logSchema, Log };
