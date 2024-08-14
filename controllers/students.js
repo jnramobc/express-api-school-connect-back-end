@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middleware/verify-token.js');
 const Student = require('../models/student.js');
-const {Log} = require('../models/log.js')
+const Log = require('../models/log.js')
 
 router.use(verifyToken);
 
@@ -32,7 +32,7 @@ router.get('/', async (req, res) => { // index of all students
 
 router.get('/:studentId', async (req, res) => { // student details
     try {
-        const student = await Student.findById(req.params.studentId).populate("logs");
+        const student = await Student.findById(req.params.studentId).populate();
         res.status(200).json(student);
     } catch (error) {
         console.log(error);
@@ -63,6 +63,23 @@ router.delete('/:studentId', async (req, res) => { // delete student info
         res.status(500).json({ error: error.message });
     };
 });
+
+router.get('/:studentId/logs', async (req, res) => { // index of all student logs 
+    try {
+        const student = await Student.findById(req.params.studentId)
+        if (!student) {
+            return res.status(404).json({ error: 'Student not found' });
+        }
+        const logs = await Log.find({studentId: student})
+            .populate()
+            .sort({ createdAt: 'desc' }) 
+        res.status(200).json(logs)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+    };
+});
+
 
 
 module.exports = router;
