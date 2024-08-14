@@ -55,6 +55,7 @@ router.delete('/:logId/comments/:commentId', async (req, res) => {
         if (!log) {
             return res.status(404).json({ error: "Log not found" });
         }
+
         const comment = log.comments.id(req.params.commentId);
         if (!comment) {
             return res.status(404).json({ error: "Comment not found" });
@@ -64,8 +65,11 @@ router.delete('/:logId/comments/:commentId', async (req, res) => {
             return res.status(403).json({ error: "Unauthorized to delete this comment" });
         }
 
-        comment.remove(); // Remove the comment from the array
-        await log.save();
+        
+        await comment.deleteOne();
+
+        await log.save(); // Save the log after the comment is removed
+
         res.status(200).json({ message: "Comment deleted successfully" });
     } catch (error) {
         console.log(error);
