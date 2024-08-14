@@ -13,17 +13,13 @@ const studentSchema = new mongoose.Schema({
     grade: {
         type: String,
         required: true
-   },
+    },
     iep: Boolean,
     plan504: Boolean,
     eld: {
         type: String,
         enum: ['1', '2', '3', '4', '5', 'FLEP', 'N/A']
     },
-    logs: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Log'
-    }],
 });
 
 const Student = mongoose.model('Student', studentSchema);

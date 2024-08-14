@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middleware/verify-token.js');
 const Student = require('../models/student.js');
+const {Log} = require('../models/log.js')
 
 router.use(verifyToken);
+
+/* --------------------------- STUDENT ROUTES --------------------------- */
 
 router.post('/', async (req, res) => { // create student
     try {
@@ -27,9 +30,9 @@ router.get('/', async (req, res) => { // index of all students
     };
 });
 
-router.get('/:studentId', async (req, res) => {
+router.get('/:studentId', async (req, res) => { // student details
     try {
-        const student = await Student.findById(req.params.studentId).populate();
+        const student = await Student.findById(req.params.studentId).populate("logs");
         res.status(200).json(student);
     } catch (error) {
         console.log(error);
@@ -37,7 +40,7 @@ router.get('/:studentId', async (req, res) => {
     };
 });
 
-router.put('/:studentId', async (req, res) => {
+router.put('/:studentId', async (req, res) => { // update student info
     try {
         const updatedStudent = await Student.findByIdAndUpdate(
             req.params.studentId,
@@ -51,7 +54,7 @@ router.put('/:studentId', async (req, res) => {
     };
 });
 
-router.delete('/:studentId', async (req, res) => {
+router.delete('/:studentId', async (req, res) => { // delete student info
     try {
         const deletedStudent = await Student.findByIdAndDelete(req.params.studentId);
         res.status(200).json(deletedStudent)
@@ -61,4 +64,3 @@ router.delete('/:studentId', async (req, res) => {
     };
 });
 
-module.exports = router;
