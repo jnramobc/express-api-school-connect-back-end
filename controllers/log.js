@@ -12,7 +12,7 @@ router.use(verifyToken);
 // move this to a different .js
 // we need move the params from front-end before submitting the form
 // so that the back-end has it
-router.post('/:studentId/logs', async (req, res) => { // create log
+router.post('/', async (req, res) => { // create log
     try {
         req.body.userId = req.user._id;  // Ensure the logged-in user is marked as the author
         req.body.studentId = req.params.studentId; // Ensure the studentId is a part of the log
@@ -27,12 +27,10 @@ router.post('/:studentId/logs', async (req, res) => { // create log
     };
 });
 
-router.get('/:studentId/logs', async (req, res) => { // index logs
+router.get('/', async (req, res) => { // index logs
     try {
         const student = await Student.findById(req.params.studentId);
         const studentLogs = student.logs;
-        console.log(student)
-        console.log(studentLogs)
         res.status(200).json(studentLogs); // Send logs as JSON
     } catch (error) {
         console.log(error);
@@ -40,7 +38,7 @@ router.get('/:studentId/logs', async (req, res) => { // index logs
     }
 });
 
-router.get('/:studentId/logs/:logId', async (req, res) => { // log details
+router.get('/:logId', async (req, res) => { // log details
     try {
         const log = await Log.findById(req.params.logId);
         res.status(200).json(log);
@@ -50,7 +48,7 @@ router.get('/:studentId/logs/:logId', async (req, res) => { // log details
     };
 });
 
-router.put('/:studentId/logs/:logId', async (req, res) => { // update log
+router.put('/:logId', async (req, res) => { // update log
     try {
         const log = await Log.findById(req.params.logId);
         if (!log.userId.equals(req.user._id)) {
@@ -66,7 +64,7 @@ router.put('/:studentId/logs/:logId', async (req, res) => { // update log
     };
 });
 
-router.delete('/:studentId/logs/:logId', async (req, res) => { // delete log
+router.delete('/:logId', async (req, res) => { // delete log
     try {
         const log = await Log.findById(req.params.logId);
         if (!log.userId.equals(req.user._id)) {
