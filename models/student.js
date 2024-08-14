@@ -14,7 +14,7 @@ const studentSchema = new mongoose.Schema({
     grade: {
         type: String,
         required: true
-   },
+    },
     iep: Boolean,
     plan504: Boolean,
     eld: {

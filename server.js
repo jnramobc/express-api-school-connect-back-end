@@ -8,6 +8,7 @@ const usersRouter = require('./controllers/users');
 const staffRouter = require('./controllers/staff.js');
 const studentRouter = require('./controllers/students.js')
 const logRouter = require('./controllers/log.js')
+const logRouter = require('./controllers/log.js')
 
 mongoose.connect(process.env.MONGODB_URI);
 
