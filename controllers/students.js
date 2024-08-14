@@ -64,3 +64,4 @@ router.delete('/:studentId', async (req, res) => { // delete student info
     };
 });
 
+module.exports = router;

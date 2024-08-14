@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const usersRouter = require('./controllers/users');
 const staffRouter = require('./controllers/staff.js');
 const studentRouter = require('./controllers/students.js')
+const logRouter = require('./controllers/log.js')
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/users', usersRouter);
 app.use('/staff', staffRouter);
 app.use('/students', studentRouter)
+app.use('/logs', logRouter)
 
 
 app.listen(3000, () => {
