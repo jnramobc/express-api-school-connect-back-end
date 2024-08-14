@@ -63,32 +63,4 @@ router.delete('/:studentId', async (req, res) => {
 });
 
 
-
-
-
-
-
-router.post('/:studentId/logs', async (req, res) => { // create log
-    try {
-        req.body.userId = req.user._id;  // Ensure the logged-in user is marked as the author
-        req.body.studentId = req.params.studentId;
-        const log = await Log.create(req.body);
-        res.status(201).json(log);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: error.message });
-    };
-});
-
-router.get('/:studentId/logs', async (req, res) => { // index logs
-    try {
-        const student = await Student.findById(req.params.studentId);
-        const studentLogs = student.logs;
-        res.status(200).json(studentLogs); // Send logs as JSON
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ error: error.message }); // Send error if any
-    }
-});
-
 module.exports = router;
