@@ -31,8 +31,6 @@ router.get('/', async (req, res) => { // index logs
     try {
         const student = await Student.findById(req.params.studentId);
         const studentLogs = student.logs;
-        console.log(student)
-        console.log(studentLogs)
         res.status(200).json(studentLogs); // Send logs as JSON
     } catch (error) {
         console.log(error);
