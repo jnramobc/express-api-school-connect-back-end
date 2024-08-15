@@ -8,7 +8,9 @@ const usersRouter = require('./controllers/users');
 const staffRouter = require('./controllers/staff.js');
 const studentRouter = require('./controllers/students.js')
 const logRouter = require('./controllers/log.js')
+const commentsRouter = require('./controllers/comments.js');
 
+const PORT = process.env.PORT ? process.env.PORT : 3000
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -23,7 +25,8 @@ app.use('/users', usersRouter);
 app.use('/staff', staffRouter);
 app.use('/students', studentRouter) //localhost:3000/students
 app.use('/logs', logRouter)
+app.use('/logs', commentsRouter);
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log('The express app is ready!');
 });
