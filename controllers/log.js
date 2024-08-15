@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middleware/verify-token.js');
-const { Log } = require('../models/log.js');
+const Log = require('../models/log.js');
 
 router.use(verifyToken);
 

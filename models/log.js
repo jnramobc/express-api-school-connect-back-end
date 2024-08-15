@@ -37,6 +37,5 @@ const logSchema = new mongoose.Schema({
     comments: [commentSchema],
 });
 
-
 const Log = mongoose.model('Log', logSchema);
-module.exports = { logSchema, Log };
+module.exports = Log;
